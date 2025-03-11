@@ -6,7 +6,7 @@ class ImportAffiliate < ApplicationService
   def initialize(merchant:, file:, delimiter: "comma")
     @merchant_id = merchant&.id
     @file = file
-    @delimiter = DELIMITERS[(delimiter.presence || 'comma').to_sym]
+    @delimiter = DELIMITERS[(delimiter.presence || "comma").to_sym]
   end
 
   def call
