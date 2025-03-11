@@ -1,0 +1,2 @@
+class AffiliateImport < Notification
+end

@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light bg-secondary mb-0">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center">
+      <%= link_to root_path, class: "navbar-brand me-3" do %>
+        <%= image_tag "logo.svg", alt: "Importful", class: "img-fluid", style: "max-height: 40px;" %>
+      <% end %>
+
+      <% if @merchant %>
+        <%= link_to "Import Affiliates", new_merchant_import_path(@merchant.slug), class: "btn btn-outline-light ms-2" %>
+      <% end %>
+    </div>
+    <% if @merchant %>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to merchant_notifications_path(@merchant.slug), class: "nav-link position-relative text-light", id: "bell-icon" do %>
+            <i class="bi bi-bell style="font-size: 1.5rem; color: #e0e0e0;""></i>
+            <%= render "shared/notification_badge", unread_notifications_count: unread_notifications_count(@merchant) %>
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</nav>
