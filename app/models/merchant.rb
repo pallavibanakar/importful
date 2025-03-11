@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :affiliates
+  has_many :notifications
 
   validates :slug,
     presence: true,

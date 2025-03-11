@@ -45,6 +45,7 @@ gem "rack-timeout"
 # Field validators
 gem "email_validator"
 gem "validate_url"
+gem "dry-validation", "~> 1.7"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

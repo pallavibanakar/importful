@@ -1,12 +1,29 @@
-<h1><%= image_tag "logo.svg" %></h1>
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light px-3">
+  <div class="card p-5 shadow-lg border-0 rounded-4 w-100" style="max-width: 800px; min-height: 500px;">
+    <h2 class="text-center mb-4 fw-bold text-primary">
+      Import Affiliates for <span class="text-dark"><%= merchant_name(@merchant.slug) %></span>
+    </h2>
 
-<%= form_with(url: imports_path, local: true, method: :post, html: { multipart: true }) do |form| %>
-  <fieldset class="field">
-    <%= form.label :file %>
-    <%= form.file_field :file, accept: '.csv' %>
-  </fieldset>
+    <%= form_with(url: merchant_imports_path(@merchant.slug), local: true, method: :post, html: { multipart: true, class: "needs-validation" }) do |import_form| %>
+      <div class="mb-4">
+        <%= import_form.label :file, "Upload CSV File", class: "form-label fw-semibold" %>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-file-earmark-arrow-up"></i></span>
+          <%= import_form.file_field :file, accept: '.csv', class: "form-control form-control-lg" %>
+        </div>
+        <small class="text-muted">Supported format: .csv</small>
+      </div>
 
-  <div class="actions">
-    <%= form.submit "Upload and Import" %>
+      <div class="mb-4">
+        <%= import_form.label :delimiter, "Select Delimiter", class: "form-label fw-semibold" %>
+        <%= import_form.select :delimiter, options_for_select(DELIMITERS.keys.map { |key| [key.to_s.capitalize, key] }), prompt: "Choose a delimiter", class: "form-select form-select-lg" %>
+      </div>
+
+      <div class="text-center">
+        <%= import_form.submit "Upload and Import", class: "btn btn-primary btn-lg w-100 mb-3" %>
+
+        <%= link_to "Download Sample File", "/import_sample.csv" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
